@@ -1,36 +1,29 @@
 <!DOCTYPE html>
-<html lang="fi">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Tärkeä Tiedote!</title>
+    <title>Ladataan tiedostoa...</title>
     <style>
-        body { margin: 0; background-color: black; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
-        .video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-        #overlay { position: absolute; z-index: 10; background: rgba(0,0,0,0.9); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-        h1 { font-size: 3rem; text-align: center; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: white; cursor: pointer; }
+        #video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; }
+        .fake-content { display: flex; align-items: center; justify-content: center; height: 100%; font-family: sans-serif; color: #333; }
     </style>
 </head>
-<body>
+<body onclick="launchRoll()">
 
-    <div id="overlay" onclick="startRickRoll()">
-        <h1>KLIKKAA TÄSTÄ JATKAAKSESI</h1>
+    <div id="fake" class="fake-content">
+        <p>Tiedostoa ladataan... <br> <strong>Klikkaa tästä vahvistaaksesi, ettet ole robotti.</strong></p>
     </div>
 
-    <div class="video-container">
-        <iframe id="rickroll" width="100%" height="100%" 
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=0" 
-            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-        </iframe>
+    <div id="video-container">
+        <iframe id="player" width="100%" height="100%" src="" frameborder="0" allow="autoplay"></iframe>
     </div>
 
     <script>
-        function startRickRoll() {
-            // Poistetaan peittokuva
-            document.getElementById('overlay').style.display = 'none';
-            // Tässä vaiheessa käyttäjä on klikannut, joten äänet voisi teoriassa avata, 
-            // mutta helpointa on ladata iframe uudestaan ilman mute-asetusta
-            const iframe = document.getElementById('rickroll');
-            iframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&loop=1&playlist=dQw4w9WgXcQ";
+        function launchRoll() {
+            document.getElementById('fake').style.display = 'none';
+            document.getElementById('video-container').style.display = 'block';
+            // Ladataan video vasta klikkauksesta äänien kanssa
+            document.getElementById('player').src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0&modestbranding=1";
         }
     </script>
 </body>
