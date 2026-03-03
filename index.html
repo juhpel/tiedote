@@ -1,31 +1,112 @@
 <!DOCTYPE html>
-<html>
+<html lang="fi">
 <head>
-    <title>Ladataan tiedostoa...</title>
+    <meta charset="UTF-8">
+    <title>Sähkökoneet: Syvällinen Analyysi</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: white; cursor: pointer; }
-        #video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; }
-        .fake-content { display: flex; align-items: center; justify-content: center; height: 100%; font-family: sans-serif; color: #333; }
+        /* Perusasetukset, jotta sivu täyttää ruudun */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Tämö peittää koko ruudun ennen klikkausta */
+        #troll-trigger {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000; /* Varmistaa, että on päällimmäisenä */
+            border: none;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Tahtikoneen kuva */
+        #motor-image {
+            max-width: 80%;
+            max-height: 60vh; /* Vie max 60% korkeudesta */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        /* Tekstityyli */
+        #trigger-text {
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+            line-height: 1.5;
+            max-width: 600px;
+        }
+
+        #trigger-text strong {
+            color: #0056b3; /* Hieman "virallisempi" sininen */
+            font-size: 28px;
+        }
+
+        /* Video-kontaineri (piilotettu aluksi) */
+        #video-container {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+        }
+
+        /* YouTube-upotus täyttää ruudun */
+        #player {
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
-<body onclick="launchRoll()">
+<body>
 
-    <div id="fake" class="fake-content">
-        <p>Paina saadaksesi helvetillinen määrä tietoa tahtikoneista <br> <strong>😏trust me bro</strong></p>
-    </div>
+    <button id="troll-trigger" onclick="pamahtaakäyntiin()">
+        <img id="motor-image" src="https://mechtex.com/uploads/images/202401/image_750x_65a4ef1c836e9.jpg" alt="Tahtikoneen poikkileikkaus">
+        
+        <div id="trigger-text">
+            <p>Paina saadaksesi helvetillinen määrä tietoa tahtikoneista <br> <strong>😏trust me bro</strong></p>
+        </div>
+    </button>
 
     <div id="video-container">
-        <iframe id="player" width="100%" height="100%" src="" frameborder="0" allow="autoplay"></iframe>
+        <iframe id="player" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
 
     <script>
-        function launchRoll() {
-            document.getElementById('fake').style.display = 'none';
-            document.getElementById('video-container').style.display = 'block';
-            // Ladataan video vasta klikkauksesta äänien kanssa
-            document.getElementById('player').src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0&modestbranding=1";
+        function pamahtaakäyntiin() {
+            // 1. Piilotetaan hämäyspainike
+            document.getElementById('troll-trigger').style.display = 'none';
+            
+            // 2. Näytetään video-kontaineri
+            const videoContainer = document.getElementById('video-container');
+            videoContainer.style.display = 'block';
+            
+            // 3. Ladataan video vasta NYT, jotta autoplay ja äänet aktivoituvat klikkauksesta
+            // Käytetään suoraa videolinkkiä, autoplay=1, mute=0, controls=0
+            const player = document.getElementById('player');
+            player.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=0&modestbranding=1&rel=0";
+            
+            // Vaihtoehtoisesti, jos haluat "Rullata" ikuisesti (loop):
+            // player.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=0&loop=1&playlist=dQw4w9WgXcQ";
         }
     </script>
 </body>
 </html>
-
